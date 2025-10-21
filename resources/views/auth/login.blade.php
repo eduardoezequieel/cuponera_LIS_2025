@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout title="Iniciar sesión">
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -32,14 +32,23 @@
             </label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-white hover:text-textMuted rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('¿Olvidaste tu contraseña?') }}
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-6">
+            <div class="flex flex-col gap-3 order-2 sm:order-1">
+                @if (Route::has('password.request'))
+                    <a class="underline text-sm text-textMuted hover:text-white transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-secondary" href="{{ route('password.request') }}">
+                        {{ __('¿Olvidaste tu contraseña?') }}
+                    </a>
+                @endif
+                
+                <a href="{{ url('/') }}" class="inline-flex items-center gap-2 text-sm text-textMuted hover:text-white transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    Volver al inicio
                 </a>
-            @endif
+            </div>
 
-            <x-primary-button class="ms-3">
+            <x-primary-button class="w-full sm:w-auto order-1 sm:order-2">
                 {{ __('Iniciar sesión') }}
             </x-primary-button>
         </div>
