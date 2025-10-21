@@ -1,5 +1,5 @@
-<x-guest-layout title="Registrarse">
-    <form method="POST" class="grid grid-cols-2 gap-3" action="{{ route('register') }}">
+<x-guest-layout title="Registrar usuario">
+    <form method="POST" class="grid grid-cols-2 gap-3" action="{{ route('register-user') }}">
         @csrf
 
         <!-- Name -->

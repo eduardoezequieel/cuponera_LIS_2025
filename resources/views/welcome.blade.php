@@ -56,7 +56,7 @@
                             </button>
                         </a>
                         
-                        <a href="{{ route('register') }}" class="w-full sm:w-auto">
+                        <a href="{{ route('choose-role') }}" class="w-full sm:w-auto">
                             <button class="w-full sm:w-auto bg-border hover:bg-border/80 text-white font-bold py-4 px-8 rounded-xl border-2 border-textMuted/20 hover:border-textMuted/40 transform hover:scale-105 transition-all duration-200 flex items-center justify-center gap-2">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />

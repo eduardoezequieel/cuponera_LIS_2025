@@ -12,14 +12,14 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
-class RegisteredUserController extends Controller
+class RegisteredCompanyController extends Controller
 {
     /**
      * Display the registration view.
      */
     public function create(): View
     {
-        return view('auth.register-user');
+        return view('auth.register-company');
     }
 
     /**
@@ -30,41 +30,39 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:100'],
-            'lastname' => ['required', 'string', 'max:100'],
-            'username' => ['required', 'string', 'max:100', 'unique:users,username'],
-            'dui' => ['required', 'string', 'size:9', 'unique:users,dui'],
-            'birth_date' => ['required', 'date'],
+            'company_name' => ['required', 'string', 'max:255'],
+            'nit' => ['required', 'string', 'size:14', 'unique:users,nit'],
+            'phone' => ['required', 'string', 'max:8'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email'],
+            'address' => ['required', 'string', 'max:255'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ], [
-            'username.unique' => 'El nombre de usuario ya existe.',
-            'dui.unique' => 'El DUI ya existe.',
-            'birth_date.required' => 'La fecha de nacimiento es obligatoria.',
-            'birth_date.date' => 'La fecha de nacimiento no es una fecha válida.',
+            'company_name.required' => 'El nombre de la compañia es obligatorio.',
+            'nit.required' => 'El NIT es obligatorio.',
+            'nit.unique' => 'El NIT ya existe.',
+            'nit.size' => 'El NIT debe tener 14 caracteres.',
+            'phone.required' => 'El teléfono es obligatorio.',
             'email.required' => 'El correo electrónico es obligatorio.',
             'email.email' => 'El correo electrónico debe ser una dirección de correo electrónico válida.',
             'email.unique' => 'El correo electrónico ya existe.',
+            'address.required' => 'La dirección es obligatoria.',
             'password.required' => 'La contraseña es obligatoria.',
             'password.confirmed' => 'Las contraseñas no coinciden.',
         ]);
 
         $user = User::create([
-            'name' => $request->name,
-            'lastname' => $request->lastname,
-            'username' => $request->username,
-            'dui' => $request->dui,
-            'birth_date' => $request->birth_date,
+            'name' => $request->company_name,
+            'company_name' => $request->company_name,
+            'nit' => $request->nit,
+            'phone' => $request->phone,
             'email' => $request->email,
+            'address' => $request->address,
             'password' => Hash::make($request->password),
         ]);
 
-        $user->assignRole('cliente'); // Asignar rol por defecto
+        $user->assignRole('empresa'); // Asignar rol por defecto
 
         event(new Registered($user));
-
-        Auth::login($user);
-
-        return redirect(route('dashboard', absolute: false));
+        return redirect()->route('register-pending');
     }
 }

@@ -11,10 +11,15 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('lastname', 100)->default('')->after('name');
-            $table->string('username', 100)->default('')->unique()->after('lastname');
-            $table->string('dui', 9)->default('')->after('username')->unique();
+            $table->string('lastname', 100)->nullable()->after('name');
+            $table->string('username', 100)->nullable()->unique()->after('lastname');
+            $table->string('dui', 9)->nullable()->after('username')->unique();
             $table->date('birth_date')->nullable()->after('dui');
+            $table->string('company_name')->nullable()->after('birth_date');
+            $table->string('nit')->nullable()->after('company_name')->unique();
+            $table->string('address')->nullable()->after('nit');
+            $table->string('phone')->nullable()->after('address');
+            $table->boolean('company_approved')->default(false)->after('phone');
         });
     }
 
@@ -24,7 +29,15 @@ return new class () extends Migration {
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['lastname', 'username', 'dui', 'birth_date']);
+            $table->dropColumn(['lastname',
+            'username',
+            'dui',
+            'birth_date',
+            'company_name',
+            'nit',
+            'address',
+            'phone',
+            'company_approved']);
         });
     }
 };
