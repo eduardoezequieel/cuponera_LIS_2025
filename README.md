@@ -108,7 +108,7 @@ Abre tu navegador y visita: [http://localhost:8000](http://localhost:8000)
 ### Admin
 
 -   Email: `admin@admin.com`
--   Password: `password`
+-   Password: `admin123`
 -   Acceso completo al sistema
 
 ### Empresa
