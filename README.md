@@ -1,61 +1,252 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# La Cuponera SV
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Plataforma de cupones donde empresas pueden vender cupones y clientes pueden comprarlos para ahorrar en sus lugares favoritos.
 
-## About Laravel
+## 🚀 Requisitos Previos
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   **XAMPP** (PHP 8.2 o superior)
+-   **Composer** (Gestor de dependencias de PHP)
+-   **Node.js** 20.16.0 o superior
+-   **Git**
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📦 Instalación
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 1. Clonar el repositorio
 
-## Learning Laravel
+```bash
+git clone https://github.com/eduardoezequieel/cuponera_LIS_2025.git
+cd cuponera_LIS_2025
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 2. Instalar dependencias de PHP
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```bash
+composer install
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 3. Instalar dependencias de Node.js
 
-## Laravel Sponsors
+```bash
+npm install
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 4. Configurar variables de entorno
 
-### Premium Partners
+Copia el archivo `.env.example` y renómbralo a `.env`:
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+```bash
+cp .env.example .env
+```
 
-## Contributing
+### 5. Generar la clave de aplicación
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+php artisan key:generate
+```
 
-## Code of Conduct
+### 6. Configurar la base de datos
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Este proyecto usa **MySQL con XAMPP**.
 
-## Security Vulnerabilities
+**Pasos para configurar:**
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. Inicia **XAMPP** y activa los servicios de **Apache** y **MySQL**
 
-## License
+2. Crea la base de datos desde **phpMyAdmin** (http://localhost/phpmyadmin):
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    - Haz clic en "Nueva"
+    - Nombre de la base de datos: `cuponera`
+    - Cotejamiento: `utf8mb4_unicode_ci`
+    - Clic en "Crear"
+
+3. Verifica que tu archivo `.env` tenga la siguiente configuración:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=cuponera
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### 7. Ejecutar migraciones y seeders
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+Esto creará las tablas y los siguientes datos iniciales:
+
+-   **Roles**: admin, empresa, cliente
+-   **Usuario Admin**:
+    -   Email: `admin@admin.com`
+    -   Password: `password`
+
+### 8. Iniciar el servidor de desarrollo
+
+Necesitas **dos terminales** abiertas:
+
+**Terminal 1 - Servidor Laravel:**
+
+```bash
+php artisan serve
+```
+
+**Terminal 2 - Compilador de assets (Vite):**
+
+```bash
+npm run dev
+```
+
+### 9. Acceder a la aplicación
+
+Abre tu navegador y visita: [http://localhost:8000](http://localhost:8000)
+
+## 👥 Tipos de Usuario
+
+### Admin
+
+-   Email: `admin@admin.com`
+-   Password: `password`
+-   Acceso completo al sistema
+
+### Empresa
+
+-   Puede crear y gestionar cupones
+-   Gestiona su perfil de empresa
+
+### Cliente
+
+-   Puede comprar y usar cupones
+-   Gestiona su perfil personal
+
+## 🛠️ Comandos Útiles
+
+### Limpiar caché
+
+```bash
+php artisan cache:clear
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear
+```
+
+### Recrear base de datos
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+### Compilar assets para producción
+
+```bash
+npm run build
+```
+
+### Ejecutar tests
+
+```bash
+php artisan test
+```
+
+## 📁 Estructura del Proyecto
+
+```
+cuponera_LIS_fase1/
+├── app/                    # Lógica de la aplicación
+│   ├── Http/
+│   │   └── Controllers/    # Controladores
+│   └── Models/             # Modelos Eloquent
+├── database/
+│   ├── migrations/         # Migraciones de base de datos
+│   └── seeders/            # Seeders
+├── resources/
+│   ├── css/                # Estilos Tailwind
+│   ├── js/                 # JavaScript y Alpine.js
+│   └── views/              # Vistas Blade
+├── routes/
+│   ├── web.php             # Rutas web
+│   └── auth.php            # Rutas de autenticación
+└── public/                 # Archivos públicos
+```
+
+## 🎨 Tecnologías
+
+-   **Backend**: Laravel 12.x
+-   **Frontend**: Blade, Tailwind CSS, Alpine.js
+-   **Base de Datos**: MySQL (XAMPP)
+-   **Autenticación**: Laravel Breeze
+-   **Roles y Permisos**: Spatie Permission
+-   **Build Tool**: Vite 5.4.20
+
+## 🔐 Seguridad
+
+Si encuentras alguna vulnerabilidad de seguridad, por favor contacta al equipo de desarrollo.
+
+## 📝 Licencia
+
+Este proyecto es parte de un trabajo académico para LIS - Universidad Don Bosco
+
+## 👨‍💻 Desarrollo
+
+### Crear nuevo controlador
+
+```bash
+php artisan make:controller NombreController
+```
+
+### Crear nuevo modelo con migración
+
+```bash
+php artisan make:model Nombre -m
+```
+
+### Crear nuevo seeder
+
+```bash
+php artisan make:seeder NombreSeeder
+```
+
+### Ver rutas disponibles
+
+```bash
+php artisan route:list
+```
+
+## 🐛 Solución de Problemas
+
+### Error: "No application encryption key has been specified"
+
+```bash
+php artisan key:generate
+```
+
+### Error con permisos en storage/
+
+```bash
+# Windows
+icacls storage /grant Users:F /T
+icacls bootstrap/cache /grant Users:F /T
+
+# Linux/Mac
+chmod -R 775 storage bootstrap/cache
+```
+
+### Error con Vite
+
+```bash
+npm cache clean --force
+rm -rf node_modules package-lock.json
+npm install
+```
+
+### Puerto 8000 ya está en uso
+
+```bash
+php artisan serve --port=8080
+```
+
+## 📞 Soporte
+
+Para preguntas o problemas, contacta al equipo de desarrollo o abre un issue en el repositorio.
