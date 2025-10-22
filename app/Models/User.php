@@ -28,6 +28,10 @@ class User extends Authenticatable
         'birth_date',
         'email',
         'password',
+        'company_name',
+        'nit',
+        'phone',
+        'address',
     ];
 
     /**

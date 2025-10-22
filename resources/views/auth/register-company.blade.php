@@ -15,7 +15,17 @@
         <!-- nit -->
         <div>
             <x-input-label for="nit" :value="__('NIT')" />
-            <x-text-input maxlength="14" id="nit" class="block mt-1 w-full" type="text" name="nit" :value="old('nit')" required autofocus autocomplete="nit" />
+            <x-text-input 
+                id="nit" 
+                class="block mt-1 w-full" 
+                type="text" 
+                name="nit" 
+                :value="old('nit')" 
+                required 
+                autofocus 
+                autocomplete="nit"
+                placeholder="0000-000000-000-0" 
+            />
             <x-input-error :messages="$errors->get('nit')" class="mt-2" />
         </div>
 
@@ -86,4 +96,29 @@
             </x-primary-button>
         </div>
     </form>
+
+    <script>        
+        document.addEventListener('DOMContentLoaded', () => {
+            const nitInput = document.getElementById('nit');
+            const phoneInput = document.getElementById('phone');
+            
+            if (nitInput && window.IMask) {
+                const maskOptions = {
+                    mask: '0000-000000-000-0',
+                    lazy: false,
+                };
+                
+                const mask = window.IMask(nitInput, maskOptions);
+            }
+
+            if (phoneInput && window.IMask) {
+                const maskOptions = {
+                    mask: '0000-0000',
+                    lazy: false,
+                };
+                
+                const mask = window.IMask(phoneInput, maskOptions);
+            }
+        });
+    </script>
 </x-guest-layout>
