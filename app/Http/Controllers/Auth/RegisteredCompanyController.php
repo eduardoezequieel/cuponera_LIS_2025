@@ -28,6 +28,10 @@ class RegisteredCompanyController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $request->merge([
+            'nit' => str_replace('-', '', $request->nit),
+            'phone' => str_replace('-', '', $request->phone)
+        ]);
 
         $request->validate([
             'company_name' => ['required', 'string', 'max:255'],

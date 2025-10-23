@@ -49,7 +49,7 @@
             <x-textarea-input id="address" class="block mt-1 w-full" name="address" :value="old('address')" required autofocus autocomplete="address" />
             <x-input-error :messages="$errors->get('address')" class="mt-2" />
         </div>
-
+   
         <!-- Password -->
         <div>
             <x-input-label for="password" :value="__('Contraseña')" />
