@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout title="Olvidé mi contraseña">
     <div class="mb-4 text-sm text-textMuted">
         {{ __('¿Olvidaste tu contraseña? No hay problema. Solo indícanos tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña que te permitirá elegir una nueva.') }}
     </div>
