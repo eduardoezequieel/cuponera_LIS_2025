@@ -81,7 +81,7 @@ Esto creará las tablas y los siguientes datos iniciales:
 -   **Roles**: admin, empresa, cliente
 -   **Usuario Admin**:
     -   Email: `admin@admin.com`
-    -   Password: `password`
+    -   Password: `admin123`
 
 ### 8. Iniciar el servidor de desarrollo
 
