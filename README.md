@@ -1,4 +1,4 @@
-# La Cuponera SV
+# La Cuponera SV - Fase 1 
 
 Plataforma de cupones donde empresas pueden vender cupones y clientes pueden comprarlos para ahorrar en sus lugares favoritos.
 
