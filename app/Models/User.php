@@ -45,6 +45,15 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    // Añadido: incluir fullname al serializar (toArray / toJson)
+    protected $appends = ['fullname'];
+
+    // Añadido: accesor para fullname
+    public function getFullnameAttribute(): string
+    {
+        return trim(($this->name ?? '') . ' ' . ($this->lastname ?? ''));
+    }
+
     /**
      * Get the attributes that should be cast.
      *
