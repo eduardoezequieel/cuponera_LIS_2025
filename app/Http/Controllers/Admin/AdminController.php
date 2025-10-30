@@ -66,7 +66,7 @@ class AdminController extends Controller
      */
     public function show(User $admin)
     {
-        return view('admin.admins.show', compact('admin'));
+        return redirect()->route('admin.admins.index');
     }
 
     /**

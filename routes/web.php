@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,7 @@ Route::middleware('auth')->group(function () {
 // Admin routes
 Route::middleware(['auth', 'role:admin'])->prefix('dashboard')->name('admin.')->group(function () {
     Route::resource('admins', AdminController::class);
+    Route::resource('companies', CompanyController::class);
 });
 
 require __DIR__.'/auth.php';

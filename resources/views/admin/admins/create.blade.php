@@ -22,35 +22,35 @@
                     <!-- Name -->
                     <div>
                         <x-input-label for="name" :value="__('Nombre')" />
-                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                        <x-text-input id="name" maxlength="100" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
 
                     <!-- Lastname -->
                     <div>
                         <x-input-label for="lastname" :value="__('Apellido')" />
-                        <x-text-input id="lastname" class="block mt-1 w-full" type="text" name="lastname" :value="old('lastname')" required autofocus />
+                        <x-text-input id="lastname" maxlength="100" class="block mt-1 w-full" type="text" name="lastname" :value="old('lastname')" required autofocus />
                         <x-input-error :messages="$errors->get('lastname')" class="mt-2" />
                     </div>
 
                     <!-- Email -->
                     <div class="col-span-2">
                         <x-input-label for="email" :value="__('Correo electrónico')" />
-                        <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+                        <x-text-input id="email" maxlength="100" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
 
                     <!-- Password -->
                     <div>
                         <x-input-label for="password" :value="__('Contraseña')" />
-                        <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required />
+                        <x-text-input id="password" maxlength="16" class="block mt-1 w-full" type="password" name="password" required />
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
 
                     <!-- Confirm Password -->
                     <div>
                         <x-input-label for="password_confirmation" :value="__('Confirmar contraseña')" />
-                        <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required />
+                        <x-text-input id="password_confirmation" maxlength="16" class="block mt-1 w-full" type="password" name="password_confirmation" required />
                         <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                     </div>
 
