@@ -34,8 +34,15 @@
                         <x-input-error :messages="$errors->get('lastname')" class="mt-2" />
                     </div>
 
+                    <!-- Username -->
+                    <div>
+                        <x-input-label for="username" :value="__('Usuario')" />
+                        <x-text-input id="username" maxlength="100" class="block mt-1 w-full" type="text" name="username" :value="old('username', $admin->username)" required autofocus />
+                        <x-input-error :messages="$errors->get('username')" class="mt-2" />
+                    </div>
+
                     <!-- Email -->
-                    <div class="col-span-2">
+                    <div>
                         <x-input-label for="email" :value="__('Correo electrónico')" />
                         <x-text-input id="email" maxlength="100" class="block mt-1 w-full" type="email" name="email" :value="old('email', $admin->email)" required />
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />

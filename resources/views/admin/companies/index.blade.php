@@ -44,6 +44,9 @@
                                 Correo Electrónico
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-textMuted uppercase tracking-wider">
+                                Verificada
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-textMuted uppercase tracking-wider">
                                 Fecha de Creación
                             </th>
                             <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-textMuted uppercase tracking-wider">
@@ -74,18 +77,28 @@
                                     {{ $company->email }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-textMuted">
+                                    @if($company->company_approved)
+                                        <span class="inline-flex items-center px-2 py-1 bg-green-600/20 text-green-400 text-xs font-medium rounded-lg">
+                                            Verificada
+                                        </span>
+                                    @else
+                                        <span class="inline-flex items-center px-2 py-1 bg-red-600/20 text-red-400 text-xs font-medium rounded-lg">
+                                            No Verificada
+                                        </span>
+                                    @endif
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-textMuted">
                                     {{ $company->created_at->format('d/m/Y') }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                     <div class="flex justify-end gap-2">
-                                        <a href="{{ route('admin.admins.edit', $company) }}" class="inline-flex items-center gap-1 text-primary hover:text-primary/80 transition-colors">
+                                        <a href="{{ route('admin.companies.edit', $company) }}" class="inline-flex items-center gap-1 text-primary hover:text-primary/80 transition-colors">
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                             </svg>
                                             Editar
                                         </a>
                                         @if($company->id !== Auth::id())
-                                            <form method="POST" action="{{ route('admin.admins.destroy', $company) }}" onsubmit="return confirm('¿Estás seguro de eliminar este administrador?')">
+                                            <form method="POST" action="{{ route('admin.companies.destroy', $company) }}" onsubmit="return confirm('¿Estás seguro de eliminar este administrador?')">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="inline-flex items-center gap-1 text-red-400 hover:text-red-300 transition-colors">

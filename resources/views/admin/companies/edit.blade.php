@@ -60,10 +60,12 @@
                     <!-- Address -->
                     <div class="col-span-2">
                         <x-input-label for="address" :value="__('Dirección')" />
-                        <x-textarea-input id="address" maxlength="255" class="block mt-1 w-full" name="address" :value="old('address', $company->address)" required autocomplete="address" />
+                        <x-textarea-input id="address" maxlength="255" class="block mt-1 w-full" name="address" required autocomplete="address">{{ old('address', $company->address) }}</x-textarea-input>
                         <x-input-error :messages="$errors->get('address')" class="mt-2" />
                     </div>
 
+                    <!-- Company approved (switch component) -->
+                    <x-switch id="company_approved" name="company_approved" :checked="old('company_approved', $company->company_approved)" label="Aprobada" helper="Marcar si la compañía está aprobada" />
                     <!-- Password -->
                     <div>
                         <x-input-label for="password" :value="__('Nueva Contraseña (opcional)')" />

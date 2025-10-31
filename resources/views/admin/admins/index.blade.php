@@ -35,6 +35,9 @@
                                 Nombre
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-textMuted uppercase tracking-wider">
+                                Usuario
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-textMuted uppercase tracking-wider">
                                 Email
                             </th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-textMuted uppercase tracking-wider">
@@ -57,6 +60,9 @@
                                             <div class="text-sm font-medium text-white">{{ $admin->fullname }}</div>
                                         </div>
                                     </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-textMuted">
+                                    {{ $admin->username }}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-textMuted">
                                     {{ $admin->email }}

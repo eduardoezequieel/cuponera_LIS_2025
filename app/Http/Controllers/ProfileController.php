@@ -44,9 +44,18 @@ class ProfileController extends Controller
     {
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current_password'],
+        ], [
+            'password.required' => 'La contraseña es obligatoria.',
+            'password.current_password' => 'La contraseña no es correcta.',
         ]);
 
         $user = $request->user();
+
+        // Prevent admin@admin.com from deleting their account
+        if ($user->email === 'admin@admin.com') {
+            return Redirect::route('profile.edit')
+                ->withErrors(['email' => 'No puedes eliminar la cuenta principal del administrador.']);
+        }
 
         Auth::logout();
 

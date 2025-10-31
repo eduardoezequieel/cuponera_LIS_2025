@@ -16,7 +16,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $admins = User::role('admin')->where('id', '!=', Auth::id())->paginate(10);
+        $admins = User::role('admin')->where('id', '!=', Auth::id())->where('email', '!=', 'admin@admin.com')->paginate(10);
         return view('admin.admins.index', compact('admins'));
     }
 
@@ -34,13 +34,16 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'lastname' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+            'name' => ['required', 'string', 'max:100'],
+            'lastname' => ['required', 'string', 'max:100'],
+            'username' => ['required', 'string', 'max:100', 'unique:users,username'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users,email'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ], [
             'name.required' => 'El nombre es obligatorio.',
             'lastname.required' => 'El apellido es obligatorio.',
+            'username.required' => 'El nombre de usuario es obligatorio.',
+            'username.unique' => 'Este nombre de usuario ya está en uso.',
             'email.required' => 'El correo electrónico es obligatorio.',
             'email.email' => 'El correo electrónico debe ser válido.',
             'email.unique' => 'Este correo electrónico ya está registrado.',
@@ -51,6 +54,7 @@ class AdminController extends Controller
         $user = User::create([
             'name' => $request->name,
             'lastname' => $request->lastname,
+            'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
@@ -83,11 +87,16 @@ class AdminController extends Controller
     public function update(Request $request, User $admin)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $admin->id],
+            'name' => ['required', 'string', 'max:100'],
+            'lastname' => ['required', 'string', 'max:100'],
+            'username' => ['required', 'string', 'max:100', 'unique:users,username,' . $admin->id],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users,email,' . $admin->id],
             'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
         ], [
             'name.required' => 'El nombre es obligatorio.',
+            'lastname.required' => 'El apellido es obligatorio.',
+            'username.required' => 'El nombre de usuario es obligatorio.',
+            'username.unique' => 'Este nombre de usuario ya está en uso.',
             'email.required' => 'El correo electrónico es obligatorio.',
             'email.email' => 'El correo electrónico debe ser válido.',
             'email.unique' => 'Este correo electrónico ya está registrado.',
@@ -97,6 +106,8 @@ class AdminController extends Controller
         $admin->update([
             'name' => $request->name,
             'email' => $request->email,
+            'lastname' => $request->lastname,
+            'username' => $request->username,
         ]);
 
         if ($request->filled('password')) {
@@ -116,6 +127,10 @@ class AdminController extends Controller
     {
         if ($admin->id === Auth::id()) {
             return back()->with('error', 'No puedes eliminar tu propia cuenta.');
+        }
+
+        if ($admin->email === 'admin@admin.com') {
+            return back()->with('error', 'No puedes eliminar la cuenta principal del administrador.');
         }
 
         $admin->delete();

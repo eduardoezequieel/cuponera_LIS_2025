@@ -46,6 +46,10 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('company-not-approved', function () {
+        return view('auth.company-not-approved');
+    })->name('company.not-approved');
+
     Route::get('verify-email', EmailVerificationPromptController::class)
         ->name('verification.notice');
 

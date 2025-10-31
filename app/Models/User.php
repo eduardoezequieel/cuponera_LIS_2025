@@ -33,6 +33,7 @@ class User extends Authenticatable
         'nit',
         'phone',
         'address',
+        'company_approved',
     ];
 
     /**

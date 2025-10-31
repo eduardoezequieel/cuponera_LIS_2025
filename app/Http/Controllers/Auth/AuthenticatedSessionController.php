@@ -37,6 +37,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        // Check if user is a company and is not approved
+        $user = Auth::user();
+        if ($user->hasRole('empresa') && !$user->company_approved) {
+            return redirect()->route('company.not-approved');
+        }
+
         return redirect()->intended(route('dashboard', absolute: false));
     }
 
