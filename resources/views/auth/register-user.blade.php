@@ -86,4 +86,20 @@
             </x-primary-button>
         </div>
     </form>
+
+    <script src="https://unpkg.com/imask"></script>
+    <script>        
+        document.addEventListener('DOMContentLoaded', () => {
+            const duiInput = document.getElementById('dui');
+            
+            if (duiInput && window.IMask) {
+                const maskOptions = {
+                    mask: '00000000-0',
+                    lazy: false,
+                };
+                
+                const mask = window.IMask(duiInput, maskOptions);
+            }
+        });
+    </script>
 </x-guest-layout>

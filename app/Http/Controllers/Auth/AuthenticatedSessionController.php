@@ -43,6 +43,11 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('company.not-approved');
         }
 
+        // Redirect clients to coupons
+        if ($user->hasRole('cliente')) {
+            return redirect()->route('client.coupons.index');
+        }
+
         return redirect()->intended(route('dashboard', absolute: false));
     }
 

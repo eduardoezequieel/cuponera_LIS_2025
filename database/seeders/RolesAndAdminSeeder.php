@@ -37,5 +37,22 @@ class RolesAndAdminSeeder extends Seeder
         if (!$admin->hasRole('admin')) {
             $admin->assignRole('admin');
         }
+
+        // Empresa por defecto
+        $empresa = User::firstOrCreate(
+            ['email' => 'empresa@empresa.com'],
+            [
+                'name' => 'Empresa Demo',
+                'company_name' => 'Empresa Demo',
+                'nit' => '0614-290465-101-3',
+                'phone' => '77778888',
+                'address' => 'San Salvador, El Salvador',
+                'company_approved' => true,
+                'password' => Hash::make('empresa123'),
+            ]
+        );
+        if (!$empresa->hasRole('empresa')) {
+            $empresa->assignRole('empresa');
+        }
     }
 }
