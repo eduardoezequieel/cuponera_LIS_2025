@@ -44,6 +44,7 @@ class CompanyController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email'],
             'address' => ['required', 'string', 'max:255'],
             'company_approved' => ['sometimes', 'boolean'],
+            'commission_percentage' => ['required', 'numeric', 'min:0', 'max:100'],
             'password' => ['required', 'confirmed'],
         ], [
             'company_name.required' => 'El nombre de la compañia es obligatorio.',
@@ -56,6 +57,10 @@ class CompanyController extends Controller
             'email.unique' => 'El correo electrónico ya existe.',
             'address.required' => 'La dirección es obligatoria.',
             'company_approved.boolean' => 'El valor de aprobación es inválido.',
+            'commission_percentage.required' => 'El porcentaje de comisión es obligatorio.',
+            'commission_percentage.numeric' => 'El porcentaje de comisión debe ser un número.',
+            'commission_percentage.min' => 'El porcentaje de comisión no puede ser menor a 0.',
+            'commission_percentage.max' => 'El porcentaje de comisión no puede ser mayor a 100.',
             'password.required' => 'La contraseña es obligatoria.',
             'password.confirmed' => 'Las contraseñas no coinciden.',
         ]);
@@ -68,6 +73,7 @@ class CompanyController extends Controller
             'email' => $request->email,
             'address' => $request->address,
             'company_approved' => $request->has('company_approved'),
+            'commission_percentage' => $request->commission_percentage,
             'password' => bcrypt($request->password),
         ]);
 
@@ -110,6 +116,7 @@ class CompanyController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email,' . $company->id],
             'address' => ['required', 'string', 'max:255'],
             'company_approved' => ['sometimes', 'boolean'],
+            'commission_percentage' => ['required', 'numeric', 'min:0', 'max:100'],
             'password' => ['nullable', 'confirmed'],
         ], [
             'company_name.required' => 'El nombre de la compañia es obligatorio.',
@@ -132,6 +139,7 @@ class CompanyController extends Controller
             'email' => $request->email,
             'address' => $request->address,
             'company_approved' => $request->has('company_approved'),
+            'commission_percentage' => $request->commission_percentage,
         ]);
 
         if ($request->filled('password')) {

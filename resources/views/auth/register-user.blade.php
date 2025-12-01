@@ -19,7 +19,7 @@
         <!-- Username -->
         <div>
             <x-input-label for="username" :value="__('Nombre de usuario')" />
-            <x-text-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus autocomplete="username" />
+            <x-text-input id="us    ername" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('username')" class="mt-2" />
         </div>
 
@@ -87,7 +87,6 @@
         </div>
     </form>
 
-    <script src="https://unpkg.com/imask"></script>
     <script>        
         document.addEventListener('DOMContentLoaded', () => {
             const duiInput = document.getElementById('dui');

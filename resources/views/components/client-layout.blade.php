@@ -32,6 +32,10 @@
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <a href="{{ url('/') }}" class="border-transparent text-textMuted hover:border-primary hover:text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors">Inicio</a>
                         <a href="{{ route('client.coupons.index') }}" class="border-transparent text-textMuted hover:border-primary hover:text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors">Cupones</a>
+                        @auth
+                            <a href="{{ route('client.my-coupons') }}" class="border-transparent text-textMuted hover:border-primary hover:text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors">Mis Cupones</a>
+                            <a href="{{ route('client.invoices') }}" class="border-transparent text-textMuted hover:border-primary hover:text-white inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors">Facturas</a>
+                        @endauth
                     </div>
                 </div>
                 <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -84,5 +88,6 @@
         @endif
         {{ $slot }}
     </main>
+    @stack('scripts')
 </body>
 </html>

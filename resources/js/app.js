@@ -6,4 +6,6 @@ import IMask from "imask";
 window.Alpine = Alpine;
 window.IMask = IMask;
 
+console.log('executed')
+
 Alpine.start();

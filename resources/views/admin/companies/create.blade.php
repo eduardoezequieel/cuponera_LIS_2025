@@ -66,6 +66,25 @@
                     <!-- Company approved (switch component) -->
                     <x-switch id="company_approved" name="company_approved" :checked="old('company_approved')" label="Aprobada" helper="Marcar si la compañía está aprobada" />
 
+                    <!-- Commission Percentage -->
+                    <div>
+                        <x-input-label for="commission_percentage" :value="__('Porcentaje de Comisión (%)')" />
+                        <x-text-input 
+                            id="commission_percentage" 
+                            class="block mt-1 w-full" 
+                            type="number" 
+                            name="commission_percentage" 
+                            :value="old('commission_percentage', '10.00')" 
+                            required 
+                            step="0.01"
+                            min="0"
+                            max="100"
+                            placeholder="10.00" 
+                        />
+                        <p class="text-xs text-textMuted mt-1">Porcentaje que cobra la plataforma por cada venta</p>
+                        <x-input-error :messages="$errors->get('commission_percentage')" class="mt-2" />
+                    </div>
+
                     <!-- Password -->
                     <div>
                         <x-input-label for="password" :value="__('Contraseña')" />

@@ -34,6 +34,7 @@ class User extends Authenticatable
         'phone',
         'address',
         'company_approved',
+        'commission_percentage',
     ];
 
     /**
@@ -60,6 +61,11 @@ class User extends Authenticatable
         return $this->hasMany(Purchase::class);
     }
 
+    public function coupons()
+    {
+        return $this->hasMany(Coupon::class);
+    }
+
     /**
      * Get the attributes that should be cast.
      *
@@ -70,6 +76,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'birth_date' => 'datetime',
         ];
     }
 

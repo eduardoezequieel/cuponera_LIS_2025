@@ -1,103 +1,57 @@
-# La Cuponera SV - Fase 1 
+# La Cuponera SV
 
-Plataforma de cupones donde empresas pueden vender cupones y clientes pueden comprarlos para ahorrar en sus lugares favoritos.
+Sistema de gestión de cupones donde empresas venden ofertas y clientes obtienen descuentos.
 
-## 🚀 Requisitos Previos
+## ⚡ Instalación Rápida
 
--   **XAMPP** (PHP 8.2 o superior)
--   **Composer** (Gestor de dependencias de PHP)
--   **Node.js** 20.16.0 o superior
--   **Git**
+### Requisitos
 
-## 📦 Instalación
+-   XAMPP (PHP 8.2+)
+-   Composer
+-   Node.js 20+
 
-### 1. Clonar el repositorio
+### Pasos
 
 ```bash
+# 1. Clonar e instalar
 git clone https://github.com/eduardoezequieel/cuponera_LIS_2025.git
 cd cuponera_LIS_2025
-```
-
-### 2. Instalar dependencias de PHP
-
-```bash
 composer install
-```
-
-### 3. Instalar dependencias de Node.js
-
-```bash
 npm install
-```
 
-### 4. Configurar variables de entorno
-
-Copia el archivo `.env.example` y renómbralo a `.env`:
-
-```bash
+# 2. Configurar entorno
 cp .env.example .env
-```
-
-### 5. Generar la clave de aplicación
-
-```bash
 php artisan key:generate
-```
 
-### 6. Configurar la base de datos
+# 3. Crear base de datos 'cuponera' en phpMyAdmin (XAMPP)
 
-Este proyecto usa **MySQL con XAMPP**.
-
-**Pasos para configurar:**
-
-1. Inicia **XAMPP** y activa los servicios de **Apache** y **MySQL**
-
-2. Crea la base de datos desde **phpMyAdmin** (http://localhost/phpmyadmin):
-
-    - Haz clic en "Nueva"
-    - Nombre de la base de datos: `cuponera`
-    - Cotejamiento: `utf8mb4_unicode_ci`
-    - Clic en "Crear"
-
-3. Verifica que tu archivo `.env` tenga la siguiente configuración:
-
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
+# 4. Configurar .env
 DB_DATABASE=cuponera
 DB_USERNAME=root
 DB_PASSWORD=
-```
 
-### 7. Ejecutar migraciones y seeders
-
-```bash
+# 5. Migrar y poblar base de datos
 php artisan migrate:fresh --seed
+
+# 6. Iniciar servidor (2 terminales)
+php artisan serve          # Terminal 1
+npm run dev                # Terminal 2
 ```
 
-Esto creará las tablas y los siguientes datos iniciales:
+Accede: **http://localhost:8000**
 
--   **Roles**: admin, empresa, cliente
--   **Usuario Admin**:
-    -   Email: `admin@admin.com`
-    -   Password: `admin123`
+## 🔑 Credenciales
 
-### 8. Iniciar el servidor de desarrollo
+**Admin:** `admin@admin.com` / `admin123`  
+**Empresas:** `[email]` / `password123`  
+**Clientes:** `[email]` / `password123`
 
-Necesitas **dos terminales** abiertas:
+## 📊 Datos de Prueba
 
-**Terminal 1 - Servidor Laravel:**
-
-```bash
-php artisan serve
-```
-
-**Terminal 2 - Compilador de assets (Vite):**
-
-```bash
-npm run dev
-```
+-   15 empresas (Pizza Hut, Burger King, Cinépolis, etc.)
+-   53 cupones activos
+-   20 clientes
+-   158+ compras realizadas
 
 ### 9. Acceder a la aplicación
 
@@ -144,109 +98,30 @@ php artisan migrate:fresh --seed
 npm run build
 ```
 
-### Ejecutar tests
+## 🎨 Stack Tecnológico
 
-```bash
-php artisan test
-```
+-   Laravel 12 + Breeze
+-   MySQL (XAMPP)
+-   Tailwind CSS + Alpine.js
+-   Spatie Permission
+-   DomPDF (reportes)
+-   Vite
 
-## 📁 Estructura del Proyecto
+## ⚠️ Problemas Comunes
 
-```
-cuponera_LIS_fase1/
-├── app/                    # Lógica de la aplicación
-│   ├── Http/
-│   │   └── Controllers/    # Controladores
-│   └── Models/             # Modelos Eloquent
-├── database/
-│   ├── migrations/         # Migraciones de base de datos
-│   └── seeders/            # Seeders
-├── resources/
-│   ├── css/                # Estilos Tailwind
-│   ├── js/                 # JavaScript y Alpine.js
-│   └── views/              # Vistas Blade
-├── routes/
-│   ├── web.php             # Rutas web
-│   └── auth.php            # Rutas de autenticación
-└── public/                 # Archivos públicos
-```
+**Error encryption key:** `php artisan key:generate`  
+**Puerto ocupado:** `php artisan serve --port=8080`  
+**Error Vite:** `npm cache clean --force && npm install`
 
-## 🎨 Tecnologías
+## 👥 Autores
 
--   **Backend**: Laravel 12.x
--   **Frontend**: Blade, Tailwind CSS, Alpine.js
--   **Base de Datos**: MySQL (XAMPP)
--   **Autenticación**: Laravel Breeze
--   **Roles y Permisos**: Spatie Permission
--   **Build Tool**: Vite 5.4.20
+Este proyecto fue realizado por:
 
-## 🔐 Seguridad
-
-Si encuentras alguna vulnerabilidad de seguridad, por favor contacta al equipo de desarrollo.
+-   **Christian Gustavo Crespin Lozano** - CL060107
+-   **Diego Guillermo Esnard Romero** - ER231474
+-   **Diego Rene López Martinez** - LM231893
+-   **Eduardo Ezequiel López Rivera** - LR230061
 
 ## 📝 Licencia
 
-Este proyecto es parte de un trabajo académico para LIS - Universidad Don Bosco
-
-## 👨‍💻 Desarrollo
-
-### Crear nuevo controlador
-
-```bash
-php artisan make:controller NombreController
-```
-
-### Crear nuevo modelo con migración
-
-```bash
-php artisan make:model Nombre -m
-```
-
-### Crear nuevo seeder
-
-```bash
-php artisan make:seeder NombreSeeder
-```
-
-### Ver rutas disponibles
-
-```bash
-php artisan route:list
-```
-
-## 🐛 Solución de Problemas
-
-### Error: "No application encryption key has been specified"
-
-```bash
-php artisan key:generate
-```
-
-### Error con permisos en storage/
-
-```bash
-# Windows
-icacls storage /grant Users:F /T
-icacls bootstrap/cache /grant Users:F /T
-
-# Linux/Mac
-chmod -R 775 storage bootstrap/cache
-```
-
-### Error con Vite
-
-```bash
-npm cache clean --force
-rm -rf node_modules package-lock.json
-npm install
-```
-
-### Puerto 8000 ya está en uso
-
-```bash
-php artisan serve --port=8080
-```
-
-## 📞 Soporte
-
-Para preguntas o problemas, contacta al equipo de desarrollo o abre un issue en el repositorio.
+Proyecto académico - LIS Universidad Don Bosco

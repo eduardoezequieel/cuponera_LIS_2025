@@ -61,6 +61,7 @@ class RegisteredCompanyController extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
             'address' => $request->address,
+            'commission_percentage' => 10.00,
             'password' => Hash::make($request->password),
         ]);
 

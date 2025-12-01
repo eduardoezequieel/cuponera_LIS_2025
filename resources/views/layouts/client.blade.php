@@ -25,6 +25,9 @@
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <a href="{{ route('client.coupons.index') }}" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Cupones</a>
+                        @auth
+                            <a href="{{ route('client.my-coupons') }}" class="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">Mis Cupones</a>
+                        @endauth
                     </div>
                 </div>
                 <div class="hidden sm:flex sm:items-center sm:ml-6">

@@ -66,5 +66,11 @@
                 <p class="text-textMuted text-sm">Vuelve pronto para nuevas ofertas</p>
             </div>
         @endif
+
+        @if($coupons->hasPages())
+            <div class="mt-6">
+                {{ $coupons->links() }}
+            </div>
+        @endif
     </div>
 </x-client-layout>
