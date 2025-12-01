@@ -29,6 +29,10 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $request->merge([
+            'dui' => str_replace('-', '', $request->dui),
+        ]);
+
         $request->validate([
             'name' => ['required', 'string', 'max:100'],
             'lastname' => ['required', 'string', 'max:100'],
